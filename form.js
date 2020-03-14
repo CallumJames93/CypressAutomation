@@ -1,3 +1,8 @@
+function FocusOnInput()
+ {
+ document.getElementById("name").focus();
+ }
+
 const form = document.forms[0];
 
 form.addEventListener("submit", event => {

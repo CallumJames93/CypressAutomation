@@ -1,3 +1,33 @@
+
+// Initial Page load tests 
+describe("When page is initially opened", () =>{
+
+	it("should focus on the input field", () =>{
+
+		cy.visit("/");
+		cy.get("form");
+
+		cy.focused().should("have.id", "name");
+	});
+
+	it("the input fields should be blank", ()=>{
+
+		cy.visit("/");
+		cy.get("form");
+
+		cy.get('input[name="name"]')
+		.should("have.value", "");
+
+		cy.get('input[name="email"]')
+		.should("have.value", "");
+
+		cy.get('textarea')
+		.should("have.value", "");
+
+	});
+
+});
+
 // Delcare the test
 describe("Form test", () => {
 
@@ -27,7 +57,7 @@ describe("Form test", () => {
 
 
 // Basic stubbing XHR requests with Cypress
-describe("Form  API AJAX test", () => {
+describe("Form API Response Test", () => {
 
 	//Ensure we can navigate to the form.
 	it("Can fill the form", () => {
