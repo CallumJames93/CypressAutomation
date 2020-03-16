@@ -53,6 +53,49 @@ describe("Form test", () => {
 
 	});
 
+	it("Can fill in the form slowly", () =>{
+
+		cy.visit("/");
+		cy.get("form");
+
+		//Start filling in the form fields
+		cy.get('input[name="name"]')
+		.type("Callum", { delay: 100 })
+		.should("have.value", "Callum"); 
+
+	});
+
+	it("Can type with key modifiers", () =>{
+
+		cy.visit("/");
+		cy.get("form");
+
+		//Get the form fields
+		cy.get("input[name='name']")
+		// .type() with key modifiers
+        .type("{alt}{option}") //these are equivalent
+        .type("{ctrl}{control}") //these are equivalent
+        .type("{meta}{command}{cmd}") //these are equivalent
+        .type("{shift}")
+
+        .should('have.value', '')
+
+	});
+
+	it("Can clear text from the input fields", () =>{
+
+		cy.visit("/");
+		cy.get("form");
+
+		//Get the form fields
+		cy.get("input[name='name']")
+		// .type() with text and then call clear to remove the text
+        .type("Callum")
+        .clear()
+        .should('have.value', '')
+
+	});
+
 });
 
 
