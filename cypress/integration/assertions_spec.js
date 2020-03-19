@@ -33,5 +33,27 @@ context('Assertion Tests', () =>{
 			  	expect($div, 'text content').to.have.text('Introduction')
 			  })
 		})
-	})
+
+		it('can throw any error', () => {
+			cy.get('.docs-header')
+			  .find('div')
+			  .should(($div) => {
+
+			  	// Throw an error if we cannot find 1 element
+			  	if($div.length !== 1){
+			  		throw new Error('Did not find 1 element')
+			  	}
+
+			  	const className = $div[0].className
+			  	//Throw an error is you could not find the heading class
+			  	if (!className.match(/heading-/)) {
+			  		throw new Error(`Could not find class heading in ${className}`)
+			  	}
+
+			  })
+			})
+
+        })
 })
+
+
